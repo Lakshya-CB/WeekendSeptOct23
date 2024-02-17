@@ -1,4 +1,4 @@
-package Lec_OOPs_Part2;
+package Lec_OOPs_Trees;
 
 public class Student implements Comparable<Student> {
 	int Age;
@@ -36,5 +36,12 @@ public class Student implements Comparable<Student> {
 		return this.Age - o.Age;
 //		return o.Age - .Age;
 
+	}
+	public void setAge(int ans) throws Exception {
+		if(ans<0) {
+//			throw new RuntimeException("mat kar bhai");
+			throw new Exception("checked !!");
+		}
+		Age = ans;
 	}
 }

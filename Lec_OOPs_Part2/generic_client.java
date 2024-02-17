@@ -1,5 +1,7 @@
 package Lec_OOPs_Part2;
 
+import java.util.Comparator;
+
 public class generic_client {
 	public static void main(String[] args) {
 		Student[] arr = new Student[5];
@@ -10,7 +12,7 @@ public class generic_client {
 		arr[4] = new Student(9, "K");
 
 		print(arr);
-		sort(arr);
+		sort(arr, new cc());
 		print(arr);
 
 	}
@@ -23,19 +25,39 @@ public class generic_client {
 //	}
 	public static <ui> void print(ui[] arr) {
 		for (ui u : arr) {
+//			u.
 			System.out.println(u);
 		}
 		System.out.println("=========");
 	}
 
-	public static <pui extends Comparable<pui>> void
-	sort(pui[] arr) {
+	public static <pui extends Comparable<pui>> void sort(pui[] arr) {
 		for (int cnt = 1; cnt <= arr.length; cnt++) {
 			for (int s = 0; s <= arr.length - 2; s++) {
 //				 s ans s+1
 //				arr[s].
 //				if (arr[s].Age > arr[s + 1].Age) {
-				if(arr[s].compareTo(arr[s+1])>0) {
+				if (arr[s].compareTo(arr[s + 1]) > 0) {
+//					arr[s] - arr[s+1]>0
+					pui temp = arr[s];
+					arr[s] = arr[s + 1];
+					arr[s + 1] = temp;
+				}
+			}
+		}
+	}
+
+	static class cc implements Comparator<Student> {
+		@Override
+		public int compare(Student o1, Student o2) {
+			return o1.Age - o2.Age;
+		}
+	}
+
+	public static <pui> void sort(pui[] arr, Comparator<pui> comp) {
+		for (int cnt = 1; cnt <= arr.length; cnt++) {
+			for (int s = 0; s <= arr.length - 2; s++) {
+				if (comp.compare(arr[s], arr[s + 1]) > 0) {
 					pui temp = arr[s];
 					arr[s] = arr[s + 1];
 					arr[s + 1] = temp;
